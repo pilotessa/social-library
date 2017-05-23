@@ -1,0 +1,40 @@
+{% extends "LibraryBundle::base.html.twig" %}
+
+{% block title %}Books &#8211; Social Library{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Books</h1>
+        </div>
+
+        {% for message in app.session.flashBag.get('warning') %}
+            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="row row-list">
+            {% for book in books %}
+                <div class="col-xs-6 col-md-3">
+                    <a href="{{ path('book_view', {id: book.id}) }}" class="thumbnail">
+                        <img src="{{ book.cover }}" alt="{{ book.title }}">
+                        <h3>
+                            <small>{{ book.title }}</small>
+                        </h3>
+                        <h4>
+                            <small>
+                                {% for author in book.authors %}
+                                    {{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </small>
+                        </h4>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

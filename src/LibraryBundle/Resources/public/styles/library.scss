@@ -1,0 +1,34 @@
+body {
+    padding-top: 70px;
+}
+
+li {
+    strong {
+        display: inline-block;
+        width: 150px;
+    }
+}
+
+.row-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+
+        .thumbnail {
+            height: 100%;
+            text-align: center;
+            transition: transform .2s, box-shadow .3s;
+
+            &:hover,
+            &:focus {
+                z-index: 1;
+                text-decoration: none;
+                box-shadow: 0 30px 60px rgba(0, 0, 0, .25);
+                transform: scale(1.05);
+            }
+        }
+    }
+}
