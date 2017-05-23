@@ -13,7 +13,7 @@ class LoadAuthorData extends AbstractFixture implements OrderedFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $author = new Author();
 
             $author->setFirstName($faker->firstName);
@@ -30,6 +30,6 @@ class LoadAuthorData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 1;
+        return 10;
     }
 }

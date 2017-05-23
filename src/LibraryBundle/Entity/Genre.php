@@ -36,6 +36,14 @@ class Genre
     private $books;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -67,13 +75,6 @@ class Genre
     public function getName()
     {
         return $this->name;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -1,0 +1,38 @@
+{% extends "LibraryBundle::base.html.twig" %}
+
+{% block title %}Add book &#8211; Social Library{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li><a href="{{ path('book_index') }}">Home</a></li>
+        <li><a href="{{ path('book_list') }}">Books</a></li>
+        <li class="active">Add</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Add book</h1>
+    </div>
+
+    <div class="well">
+        {{ form_start(form) }}
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form_row(form.authors) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.genres) }}
+                </div>
+                <div class="col-md-4">
+                    {{ form_row(form.isbn) }}
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.annotation) }}
+                    {{ form_row(form.numberOfPages) }}
+                </div>
+            </div>
+
+            {{ form_row(form.save) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

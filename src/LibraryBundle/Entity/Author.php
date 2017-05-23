@@ -49,6 +49,13 @@ class Author
      */
     private $books;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -130,13 +137,6 @@ class Author
     public function getInfo()
     {
         return $this->info;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->books = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

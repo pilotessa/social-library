@@ -3,13 +3,17 @@
 namespace LibraryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use LibraryBundle\Entity\Book;
+use LibraryBundle\Form\BookType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BookController extends Controller
 {
     /**
-     * @Route("/", name="book_home")
+     * @Route("/", name="book_index")
      * @Template()
      */
     public function indexAction()
@@ -27,7 +31,7 @@ class BookController extends Controller
             ->getDoctrine()
             ->getRepository('LibraryBundle:Book')
             ->findBy(
-                ['status' => 'Approved'],
+                ['status' => 'Published'],
                 ['title' => 'ASC']
             );
 
@@ -46,12 +50,35 @@ class BookController extends Controller
             ->find($id);
 
         if (!$book) {
-            $this->addFlash('warning', 'Book not found');
-
-            return $this->redirectToRoute('book_index');
+            $this->addFlash('notice', 'Book not found');
+            return $this->redirectToRoute('book_list');
         }
 
         return ['book' => $book];
     }
 
+    /**
+     * @Route("/book/add", name="book_add")
+     * @Template()
+     */
+    public function addAction(Request $request)
+    {
+        $book = new Book();
+        $form = $this->createForm(BookType::class, $book);
+        $form->add('save', SubmitType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->get('doctrine')->getManager();
+
+            $em->persist($book);
+            $em->flush();
+
+            $this->addFlash('notice', 'Book saved');
+            return $this->redirectToRoute('book_view', array('id' => $book->getId()));
+        }
+
+        return ['form' => $form->createView()];
+    }
 }

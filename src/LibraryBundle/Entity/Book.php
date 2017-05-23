@@ -3,12 +3,15 @@
 namespace LibraryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Book
  *
  * @ORM\Table(name="book")
  * @ORM\Entity(repositoryClass="LibraryBundle\Repository\BookRepository")
+ * @UniqueEntity("isbn")
  */
 class Book
 {
@@ -31,28 +34,28 @@ class Book
     /**
      * @var string
      *
-     * @ORM\Column(name="cover", type="text")
+     * @ORM\Column(name="cover", type="text", nullable=true)
      */
     private $cover;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="annotation", type="text")
+     * @ORM\Column(name="annotation", type="text", nullable=true)
      */
     private $annotation;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="number_of_pages", type="integer")
+     * @ORM\Column(name="number_of_pages", type="integer", nullable=true)
      */
     private $numberOfPages;
 
@@ -73,7 +76,7 @@ class Book
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="published_at", type="datetime")
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     private $publishedAt;
 
@@ -86,11 +89,22 @@ class Book
 
     /**
      * @var Genre[]
-     *
+     * @Assert\Count(min = 1)
      * @ORM\ManyToMany(targetEntity="LibraryBundle\Entity\Genre", inversedBy="books")
      */
     private $genres;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->cover = 'http://lorempixel.com/768/768/';
+        $this->status = 'Published';
+        $this->addedAt = new \DateTime();
+        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -292,14 +306,6 @@ class Book
     public function getPublishedAt()
     {
         return $this->publishedAt;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

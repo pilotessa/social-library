@@ -15,7 +15,7 @@ class LoadBookData extends AbstractFixture implements OrderedFixtureInterface
 
         // Get authors
         $authors = [];
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $authors[] = $this->getReference('author-' . $i);
         }
 
@@ -35,7 +35,9 @@ class LoadBookData extends AbstractFixture implements OrderedFixtureInterface
             $book->setNumberOfPages($faker->numberBetween(10, 1000));
             $book->setStatus($faker->randomElement(['New', 'In Progress', 'Approved', 'Rejected', 'Published', 'Deleted']));
             $book->setAddedAt(new \DateTime());
-            $book->setPublishedAt(new \DateTime());
+            if ($book->getStatus() == 'Published') {
+                $book->setPublishedAt(new \DateTime());
+            }
 
             foreach ($faker->randomElements($authors, $faker->numberBetween(1, 3)) as $author) {
                 $book->addAuthor($author);
@@ -53,6 +55,6 @@ class LoadBookData extends AbstractFixture implements OrderedFixtureInterface
 
     public function getOrder()
     {
-        return 3;
+        return 30;
     }
 }
