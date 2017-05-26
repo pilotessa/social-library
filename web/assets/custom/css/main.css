@@ -23,7 +23,7 @@ li strong {
 
 /* line 16, src/LibraryBundle/Resources/public/styles/library.scss */
 
-.row-list > [class*='col-'] {
+.row-list > [class^='col-'] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,11 +31,22 @@ li strong {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
 }
 
-/* line 20, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 23, src/LibraryBundle/Resources/public/styles/library.scss */
 
-.row-list > [class*='col-'] .thumbnail {
+.row-list > [class^='col-'] .thumbnail {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
   height: 100%;
   text-align: center;
   -webkit-transition: -webkit-transform .2s, -webkit-box-shadow .3s;
@@ -44,14 +55,38 @@ li strong {
   transition: transform .2s, box-shadow .3s, -webkit-transform .2s, -webkit-box-shadow .3s;
 }
 
-/* line 25, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 29, src/LibraryBundle/Resources/public/styles/library.scss */
 
-.row-list > [class*='col-'] .thumbnail:hover,
-.row-list > [class*='col-'] .thumbnail:focus {
+.row-list > [class^='col-'] .thumbnail:hover,
+.row-list > [class^='col-'] .thumbnail:focus {
   z-index: 1;
   text-decoration: none;
   -webkit-box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
   -webkit-transform: scale(1.05);
   transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  /* line 50, src/LibraryBundle/Resources/public/styles/library.scss */
+
+  .row-list .col-sm-6 {
+    width: 374px;
+  }
+}
+
+@media (min-width: 992px) {
+  /* line 58, src/LibraryBundle/Resources/public/styles/library.scss */
+
+  .row-list .col-md-3 {
+    width: 242px;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* line 66, src/LibraryBundle/Resources/public/styles/library.scss */
+
+  .row-list .col-md-3 {
+    width: 292px;
+  }
 }
