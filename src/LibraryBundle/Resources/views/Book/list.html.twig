@@ -11,7 +11,9 @@
         {% for book in books %}
             <div class="col-sm-6 col-md-3">
                 <a href="{{ path('book_view', {id: book.id}) }}" class="thumbnail">
-                    <img src="{{ book.cover }}" alt="{{ book.title }}">
+                    {% if book.cover %}
+                        <img src="{% if 'http://' in book.cover %}{{ book.cover }}{% else %}{{ asset('uploads/' ~ book.cover) }}{% endif %}" alt="{{ book.title }}">
+                    {% endif %}
                     <h3>
                         <small>{{ book.title }}</small>
                     </h3>

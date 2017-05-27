@@ -33,7 +33,9 @@ class Book
 
     /**
      * @var string
-     *
+     * @Assert\Image(
+     *     minWidth = 768
+     * )
      * @ORM\Column(name="cover", type="text", nullable=true)
      */
     private $cover;
@@ -99,7 +101,6 @@ class Book
      */
     public function __construct()
     {
-        $this->cover = 'http://lorempixel.com/768/768/';
         $this->status = 'Published';
         $this->addedAt = new \DateTime();
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
