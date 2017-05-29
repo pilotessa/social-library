@@ -1,0 +1,31 @@
+{% extends "LibraryBundle::base.html.twig" %}
+
+{% block title %}Most Recently Added &#8211; Social Library{% endblock %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Most Recently Added</h1>
+    </div>
+
+    <div class="row row-list">
+        {% for book in books %}
+            <div class="col-xs-6 col-md-3">
+                <a href="{{ path('book_view', {id: book.id}) }}" class="thumbnail">
+                    {% if book.cover %}
+                        <img src="{% if 'http://' in book.cover %}{{ book.cover }}{% else %}{{ asset('uploads/' ~ book.cover) }}{% endif %}" alt="{{ book.title }}">
+                    {% endif %}
+                    <h3>
+                        <small>{{ book.title }}</small>
+                    </h3>
+                    <h4>
+                        <small>
+                            {% for author in book.authors %}
+                                {{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </small>
+                    </h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

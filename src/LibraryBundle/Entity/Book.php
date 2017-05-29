@@ -103,6 +103,7 @@ class Book
     {
         $this->status = 'Published';
         $this->addedAt = new \DateTime();
+        $this->publishedAt = new \DateTime();
         $this->authors = new \Doctrine\Common\Collections\ArrayCollection();
         $this->genres = new \Doctrine\Common\Collections\ArrayCollection();
     }

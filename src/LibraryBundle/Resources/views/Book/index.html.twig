@@ -1,11 +1,11 @@
 {% extends "LibraryBundle::base.html.twig" %}
 
-{% block title %}Books &#8211; Social Library{% endblock %}
+{% block title %}Social Library{% endblock %}
 
 {% block content %}
     <div class="jumbotron">
         <h1>Social Library</h1>
-        <p>...</p>
+        <p>Support our new project</p>
         <p><a class="btn btn-primary btn-lg" href="{{ path('book_list') }}" role="button">View all books</a></p>
     </div>
 
@@ -14,98 +14,43 @@
             <h2>Genres</h2>
 
             <div class="list-group">
-                <a href="#" class="list-group-item">Cras justo odio</a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
+                {% for genre in genres %}
+                    {% if genre.books|length %}
+                        <a href="{{ path('book_genre', {id: genre.id}) }}" class="list-group-item">
+                            <span class="badge">{{ genre.books|length }}</span>
+                            {{ genre.name }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
         <div class="col-md-9">
-            <h2>Recently added</h2>
+            <h2>Most Recently Added</h2>
 
             <div class="row row-list">
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
-                <div class="col-xs-6 col-md-4">
-                    <a href="/book/view/30" class="thumbnail">
-                        <img src="http://lorempixel.com/768/768/?43028" alt="A possimus veniam eos velit voluptas">
-                        <h3>
-                            <small>A possimus veniam eos velit voluptas</small>
-                        </h3>
-                        <h4>
-                            <small>
-                                Demarco Kertzmann, Coralie Macejkovic
-                            </small>
-                        </h4>
-                    </a>
-                </div>
+                {% for book in books %}
+                    <div class="col-xs-6 col-md-4">
+                        <a href="{{ path('book_view', {id: book.id}) }}" class="thumbnail">
+                            {% if book.cover %}
+                                <img src="{% if 'http://' in book.cover %}{{ book.cover }}{% else %}{{ asset('uploads/' ~ book.cover) }}{% endif %}"
+                                     alt="{{ book.title }}">
+                            {% endif %}
+                            <h3>
+                                <small>{{ book.title }}</small>
+                            </h3>
+                            <h4>
+                                <small>
+                                    {% for author in book.authors %}
+                                        {{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}
+                                    {% endfor %}
+                                </small>
+                            </h4>
+                        </a>
+                    </div>
+                {% endfor %}
             </div>
 
-            <p><a class="btn btn-primary" href="#" role="button">More&hellip;</a></p>
+            <p><a class="btn btn-primary" href="{{ path('book_recent') }}" role="button">More&hellip;</a></p>
         </div>
     </div>
 {% endblock %}

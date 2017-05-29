@@ -1,17 +1,18 @@
 /* line 1, src/LibraryBundle/Resources/public/styles/library.scss */
 
 body {
+  min-width: 480px;
   padding-top: 82px;
 }
 
-/* line 6, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 7, src/LibraryBundle/Resources/public/styles/library.scss */
 
 li strong {
   display: inline-block;
   width: 150px;
 }
 
-/* line 12, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 13, src/LibraryBundle/Resources/public/styles/library.scss */
 
 .row-list {
   display: -webkit-box;
@@ -21,7 +22,7 @@ li strong {
   flex-wrap: wrap;
 }
 
-/* line 16, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 17, src/LibraryBundle/Resources/public/styles/library.scss */
 
 .row-list > [class^='col-'] {
   display: -webkit-box;
@@ -41,7 +42,7 @@ li strong {
   align-content: stretch;
 }
 
-/* line 23, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 24, src/LibraryBundle/Resources/public/styles/library.scss */
 
 .row-list > [class^='col-'] .thumbnail {
   -webkit-box-flex: 1;
@@ -55,7 +56,7 @@ li strong {
   transition: transform .2s, box-shadow .3s, -webkit-transform .2s, -webkit-box-shadow .3s;
 }
 
-/* line 29, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 30, src/LibraryBundle/Resources/public/styles/library.scss */
 
 .row-list > [class^='col-'] .thumbnail:hover,
 .row-list > [class^='col-'] .thumbnail:focus {
@@ -67,7 +68,7 @@ li strong {
   transform: scale(1.05);
 }
 
-/* line 39, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 40, src/LibraryBundle/Resources/public/styles/library.scss */
 
 .row-list:before,
 .row-list:after {

@@ -18,7 +18,24 @@ class BookController extends Controller
      */
     public function indexAction()
     {
-        return [];
+        $genres = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Genre')
+            ->findBy(
+                [],
+                ['name' => 'ASC']
+            );
+
+        $books = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Book')
+            ->findBy(
+                ['status' => 'Published'],
+                ['publishedAt' => 'DESC'],
+                6
+            );
+
+        return compact('genres', 'books');
     }
 
     /**
@@ -36,6 +53,52 @@ class BookController extends Controller
             );
 
         return ['books' => $books];
+    }
+
+    /**
+     * @Route("/recent", name="book_recent")
+     * @Template()
+     */
+    public function recentAction()
+    {
+        $books = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Book')
+            ->findBy(
+                ['status' => 'Published'],
+                ['publishedAt' => 'DESC']
+            );
+
+        return ['books' => $books];
+    }
+
+    /**
+     * @Route("/book/genre/{id}", name="book_genre", requirements={"id": "\d+"})
+     * @Template()
+     */
+    public function genreAction($id)
+    {
+        $genre = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Genre')
+            ->find($id);
+
+        if (!$genre) {
+            $this->addFlash('notice', 'Genre not found');
+            return $this->redirectToRoute('book_list');
+        }
+
+        $books = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Book')
+            ->findBy(
+                [
+                    'status' => 'Published'
+                ],
+                ['title' => 'ASC']
+            );
+
+        return compact('genre', 'books');
     }
 
     /**
