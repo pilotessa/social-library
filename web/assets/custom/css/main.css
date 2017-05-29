@@ -67,26 +67,9 @@ li strong {
   transform: scale(1.05);
 }
 
-@media (min-width: 768px) {
-  /* line 50, src/LibraryBundle/Resources/public/styles/library.scss */
+/* line 39, src/LibraryBundle/Resources/public/styles/library.scss */
 
-  .row-list .col-sm-6 {
-    width: 374px;
-  }
-}
-
-@media (min-width: 992px) {
-  /* line 58, src/LibraryBundle/Resources/public/styles/library.scss */
-
-  .row-list .col-md-3 {
-    width: 242px;
-  }
-}
-
-@media (min-width: 1200px) {
-  /* line 66, src/LibraryBundle/Resources/public/styles/library.scss */
-
-  .row-list .col-md-3 {
-    width: 292px;
-  }
+.row-list:before,
+.row-list:after {
+  content: normal;
 }
