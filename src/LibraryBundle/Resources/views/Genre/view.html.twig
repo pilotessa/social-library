@@ -2,14 +2,6 @@
 
 {% block title %}{{ genre.name }} &#8211; Social Library{% endblock %}
 
-{% block breadcrumb %}
-    <ol class="breadcrumb">
-        <li><a href="{{ path('book_index') }}">Home</a></li>
-        <li><a href="{{ path('book_list') }}">Books</a></li>
-        <li class="active">{{ genre.name }}</li>
-    </ol>
-{% endblock %}
-
 {% block content %}
     <div class="page-header">
         <h1>{{ genre.name }}</h1>

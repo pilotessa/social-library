@@ -173,4 +173,21 @@ class Author
     {
         return $this->books;
     }
+
+    /**
+     * Get published books
+     *
+     * @return array
+     */
+    public function getPublishedBooks() {
+        $publishedBooks = [];
+
+        foreach($this->books as $book) {
+            if ($book->getStatus() == 'Published') {
+                $publishedBooks[] = $book;
+            }
+        }
+
+        return $publishedBooks;
+    }
 }

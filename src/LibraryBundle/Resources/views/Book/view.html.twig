@@ -29,13 +29,13 @@
                 <li>
                     <strong>Authors:</strong>
                     {% for author in book.authors %}
-                        {{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}
+                    <a href="{{ path('author_view', {id: author.id}) }}">{{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}</a>
                     {% endfor %}
                 </li>
                 <li>
                     <strong>Genres:</strong>
                     {% for genre in book.genres %}
-                        <a href="{{ path('book_genre', {id: genre.id}) }}">{{ genre.name }}{% if not loop.last %}, {% endif %}</a>
+                        <a href="{{ path('genre_view', {id: genre.id}) }}">{{ genre.name }}{% if not loop.last %}, {% endif %}</a>
                     {% endfor %}
                 </li>
                 <li><strong>Number of pages:</strong> {{ book.numberOfPages }}</li>

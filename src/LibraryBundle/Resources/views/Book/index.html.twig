@@ -16,7 +16,7 @@
             <div class="list-group">
                 {% for genre in genres %}
                     {% if genre.publishedBooks|length %}
-                        <a href="{{ path('book_genre', {id: genre.id}) }}" class="list-group-item">
+                        <a href="{{ path('genre_view', {id: genre.id}) }}" class="list-group-item">
                             <span class="badge">{{ genre.publishedBooks|length }}</span>
                             {{ genre.name }}
                         </a>
