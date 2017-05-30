@@ -16,7 +16,7 @@
     </div>
 
     <div class="row row-list">
-        {% for book in books %}
+        {% for book in genre.publishedBooks %}
             <div class="col-xs-6 col-md-3">
                 <a href="{{ path('book_view', {id: book.id}) }}" class="thumbnail">
                     {% if book.cover %}

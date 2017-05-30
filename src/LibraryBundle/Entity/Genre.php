@@ -32,6 +32,7 @@ class Genre
      * @var Book[]
      *
      * @ORM\ManyToMany(targetEntity="LibraryBundle\Entity\Book", mappedBy="genres")
+     * @ORM\OrderBy({"title" = "ASC"})
      */
     private $books;
 
@@ -109,5 +110,22 @@ class Genre
     public function getBooks()
     {
         return $this->books;
+    }
+
+    /**
+     * Get published books
+     *
+     * @return array
+     */
+    public function getPublishedBooks() {
+        $publishedBooks = [];
+
+        foreach($this->books as $book) {
+            if ($book->getStatus() == 'Published') {
+                $publishedBooks[] = $book;
+            }
+        }
+
+        return $publishedBooks;
     }
 }

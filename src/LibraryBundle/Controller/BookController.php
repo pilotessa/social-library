@@ -88,17 +88,7 @@ class BookController extends Controller
             return $this->redirectToRoute('book_list');
         }
 
-        $books = $this
-            ->getDoctrine()
-            ->getRepository('LibraryBundle:Book')
-            ->findBy(
-                [
-                    'status' => 'Published'
-                ],
-                ['title' => 'ASC']
-            );
-
-        return compact('genre', 'books');
+        return ['genre' => $genre];
     }
 
     /**
@@ -117,7 +107,12 @@ class BookController extends Controller
             return $this->redirectToRoute('book_list');
         }
 
-        return ['book' => $book];
+        $relatedBooks = $this
+            ->getDoctrine()
+            ->getRepository('LibraryBundle:Book')
+            ->getRelatedBooks($book);
+
+        return compact('book', 'relatedBooks');
     }
 
     /**

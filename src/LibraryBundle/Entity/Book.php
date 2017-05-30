@@ -86,6 +86,7 @@ class Book
      * @var Author[]
      *
      * @ORM\ManyToMany(targetEntity="LibraryBundle\Entity\Author", inversedBy="books")
+     * @ORM\OrderBy({"firstName" = "ASC", "lastName" = "ASC"})
      */
     private $authors;
 
@@ -93,6 +94,7 @@ class Book
      * @var Genre[]
      * @Assert\Count(min = 1)
      * @ORM\ManyToMany(targetEntity="LibraryBundle\Entity\Genre", inversedBy="books")
+     * @ORM\OrderBy({"name" = "ASC"})
      */
     private $genres;
 

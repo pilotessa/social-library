@@ -19,7 +19,8 @@
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="thumbnail">
                 {% if book.cover %}
-                    <img src="{% if 'http://' in book.cover %}{{ book.cover }}{% else %}{{ asset('uploads/' ~ book.cover) }}{% endif %}" alt="{{ book.title }}">
+                    <img src="{% if 'http://' in book.cover %}{{ book.cover }}{% else %}{{ asset('uploads/' ~ book.cover) }}{% endif %}"
+                         alt="{{ book.title }}">
                 {% endif %}
             </div>
         </div>
@@ -34,7 +35,7 @@
                 <li>
                     <strong>Genres:</strong>
                     {% for genre in book.genres %}
-                        {{ genre.name }}{% if not loop.last %}, {% endif %}
+                        <a href="{{ path('book_genre', {id: genre.id}) }}">{{ genre.name }}{% if not loop.last %}, {% endif %}</a>
                     {% endfor %}
                 </li>
                 <li><strong>Number of pages:</strong> {{ book.numberOfPages }}</li>
@@ -49,4 +50,26 @@
     <p>{{ book.annotation }}</p>
 
     <h2>Related Books</h2>
+    <div class="row row-list">
+        {% for relatedBook in relatedBooks %}
+            <div class="col-xs-6 col-md-3">
+                <a href="{{ path('book_view', {id: relatedBook.id}) }}" class="thumbnail">
+                    {% if relatedBook.cover %}
+                        <img src="{% if 'http://' in relatedBook.cover %}{{ relatedBook.cover }}{% else %}{{ asset('uploads/' ~ relatedBook.cover) }}{% endif %}"
+                             alt="{{ relatedBook.title }}">
+                    {% endif %}
+                    <h3>
+                        <small>{{ relatedBook.title }}</small>
+                    </h3>
+                    <h4>
+                        <small>
+                            {% for author in relatedBook.authors %}
+                                {{ author.firstName }} {{ author.lastName }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </small>
+                    </h4>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

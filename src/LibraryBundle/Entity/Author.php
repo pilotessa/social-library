@@ -46,6 +46,7 @@ class Author
      * @var Book[]
      *
      * @ORM\ManyToMany(targetEntity="LibraryBundle\Entity\Book", mappedBy="authors")
+     * @ORM\OrderBy({"title" = "ASC"})
      */
     private $books;
 
